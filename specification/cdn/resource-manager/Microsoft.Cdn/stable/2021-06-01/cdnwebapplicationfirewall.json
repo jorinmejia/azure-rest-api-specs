@@ -396,6 +396,12 @@
             "$ref": "#/definitions/CdnEndpoint"
           }
         },
+        "migratedTo": {
+          "readOnly": true,
+          "description": "Reference of the Profile this is migrated to.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
