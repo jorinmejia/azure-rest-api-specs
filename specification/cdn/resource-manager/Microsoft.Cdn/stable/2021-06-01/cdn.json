@@ -440,7 +440,7 @@
           "Profiles"
         ],
         "description": "Commit the migrated Azure Frontdoor(Standard/Premium) profile.",
-        "operationId": "Profiles_Migrate",
+        "operationId": "Profiles_MigrationCommit",
         "x-ms-examples": {
           "Profiles_Create": {
             "$ref": "./examples/Profiles_MigrationCommit.json"
