@@ -375,8 +375,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrate": {
@@ -419,8 +418,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/MigrateResult"
             }
@@ -466,8 +465,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -2614,7 +2613,8 @@
             "Deleting",
             "Disabled",
             "Migrating",
-            "Migrated"
+            "Migrated",
+            "PendingMigrationCommit"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2726,8 +2726,18 @@
           "readOnly": true,
           "type": "string"
         },
-        "message": {
+        "resourceName": {
+          "description": "Resource which has the problem.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorMessage": {
           "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextSteps": {
+          "description": "Describes what needs to be done to fix the problem",
           "readOnly": true,
           "type": "string"
         }
