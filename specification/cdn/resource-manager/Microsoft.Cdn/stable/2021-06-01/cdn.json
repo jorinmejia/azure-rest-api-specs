@@ -2627,15 +2627,12 @@
           "description": "Provisioning status of the profile.",
           "type": "string"
         },
-        "migratedTo": {
-          "readOnly": true,
-          "description": "Reference of the Profile this is migrated to.",
-          "$ref": "#/definitions/ResourceReference"
-        },
-        "migratedFrom": {
-          "readOnly": true,
-          "description": "Reference of the Profile this is migrated from.",
-          "$ref": "#/definitions/ResourceReference"
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for profiles.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "frontdoorId": {
           "readOnly": true,
@@ -2758,6 +2755,10 @@
             "name": "MigrationSku",
             "modelAsString": true
           }
+        },
+        "ProfileName": {
+          "description": "Name of the new profile that need to be created.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true

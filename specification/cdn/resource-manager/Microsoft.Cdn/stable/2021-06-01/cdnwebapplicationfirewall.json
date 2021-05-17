@@ -396,11 +396,12 @@
             "$ref": "#/definitions/CdnEndpoint"
           }
         },
-        "migratedTo": {
-          "readOnly": true,
-          "description": "Reference of the Profile this is migrated to.",
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for Web Application Firewall policy.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "readOnly": true,
