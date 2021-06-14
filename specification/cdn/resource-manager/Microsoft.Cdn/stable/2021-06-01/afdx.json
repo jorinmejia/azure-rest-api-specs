@@ -5062,14 +5062,43 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
-        "enableCache": {
-          "description": "A boolean field for enable or disable cache. If enableCache is true, cacheConfiguration cannot be null.",
-          "type": "boolean"
-        },
-        "cacheConfiguration": {
-          "description": "The caching configuration for this route.",
+        "compressionSettings": {
+          "description": "compression settings.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/CacheConfiguration"
+          "items": {
+            "$ref": "#/definitions/CompressionSettings"
+          }
+        },
+        "enableCache": {
+          "description": "Whether to enable cache. If cache is enabled, QueryStringCachingBehavior cannot be NotSet.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableCache",
+            "modelAsString": true
+          }
+        },
+        "queryStringCachingBehavior": {
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "IgnoreSpecifiedQueryStrings",
+            "IncludeSpecifiedQueryStrings",
+            "NotSet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "afdQueryStringCachingBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",

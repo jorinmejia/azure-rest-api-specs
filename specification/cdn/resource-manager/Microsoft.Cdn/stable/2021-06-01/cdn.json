@@ -3772,13 +3772,13 @@
           "enum": [
             "CacheExpiration",
             "CacheKeyQueryString",
-            "ModifyCacheConfiguration",
             "ModifyRequestHeader",
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
             "UrlSigning",
-            "OriginGroupOverride"
+            "OriginGroupOverride",
+            "RouteConfigurationOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -4224,9 +4224,9 @@
         }
       }
     },
-    "DeliveryRuleCacheConfigurationAction": {
-      "description": "Defines the cache configuration action for the delivery rule. Only applicable to AFDX - need to update this later",
-      "x-ms-discriminator-value": "ModifyCacheConfiguration",
+    "DeliveryRuleRouteConfigurationOverrideAction": {
+      "description": "Defines the route configuration override action for the delivery rule. Only applicable to AFDX",
+      "x-ms-discriminator-value": "RouteConfigurationOverride",
       "allOf": [
         {
           "$ref": "#/definitions/DeliveryRuleAction"
@@ -4238,12 +4238,12 @@
       "properties": {
         "parameters": {
           "description": "Defines the parameters for the action.",
-          "$ref": "#/definitions/CacheConfigurationActionParameters"
+          "$ref": "#/definitions/RouteConfigurationOverrideActionParameters"
         }
       }
     },
-    "CacheConfigurationActionParameters": {
-      "description": "Defines the parameters for the cache configuration action. To disable caching, do not provide a cacheConfiguration object.",
+    "RouteConfigurationOverrideActionParameters": {
+      "description": "Defines the parameters for the route configuration override action.",
       "required": [
         "@odata.type"
       ],
@@ -4251,15 +4251,42 @@
         "@odata.type": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheConfigurationActionParameters"
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRouteConfigurationOverrideActionParameters"
           ]
         },
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "object",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
+        },
         "enableCache": {
-          "description": "A boolean field for enable or disable cache. If enableCache is true, cacheConfiguration cannot be null.",
-          "type": "boolean"
+          "description": "Whether to enable cache. If cache is enabled, cacheConfiguration cannot be null.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableCache",
+            "modelAsString": true
+          }
         },
         "cacheConfiguration": {
           "description": "The caching configuration associated with this rule.",
+          "type": "object",
           "$ref": "#/definitions/CacheConfiguration"
         }
       }
@@ -4269,12 +4296,13 @@
       "type": "object",
       "properties": {
         "queryStringCachingBehavior": {
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
           "enum": [
-            "IgnoreQueryStrings",
-            "CacheEveryUniqueUrl",
+            "IgnoreQueryString",
+            "UseQueryString",
             "IgnoreSpecifiedQueryStrings",
-            "IncludeSpecifiedQueryStrings"
+            "IncludeSpecifiedQueryStrings",
+            "NotSet"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4304,22 +4332,9 @@
           "type": "string",
           "format": "duration"
         },
-        "compressionSettings": {
-          "description": "settings for compression.",
-          "type": "object",
-          "properties": {
-            "contentTypesToCompress": {
-              "description": "List of content types on which compression applies. The value should be a valid MIME type.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "isCompressionEnabled": {
-              "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
-              "type": "boolean"
-            }
-          }
+        "isCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "boolean"
         }
       }
     },
