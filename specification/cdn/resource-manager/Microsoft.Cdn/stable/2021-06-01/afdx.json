@@ -5062,15 +5062,8 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
-        "compressionSettings": {
-          "description": "compression settings.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/CompressionSettings"
-          }
-        },
         "enableCache": {
-          "description": "Whether to enable cache. If cache is enabled, QueryStringCachingBehavior cannot be NotSet.",
+          "description": "Whether to enable cache. If cache is enabled, cacheConfiguration cannot be null.",
           "type": "string",
           "enum": [
             "Enabled",
@@ -5081,24 +5074,10 @@
             "modelAsString": true
           }
         },
-        "queryStringCachingBehavior": {
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-          "enum": [
-            "IgnoreQueryString",
-            "UseQueryString",
-            "IgnoreSpecifiedQueryStrings",
-            "IncludeSpecifiedQueryStrings",
-            "NotSet"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "afdQueryStringCachingBehavior",
-            "modelAsString": true
-          }
-        },
-        "queryParameters": {
-          "description": "query parameters to include or exclude (comma separated).",
-          "type": "string"
+        "cacheConfiguration": {
+          "description": "The caching configuration associated with this rule.",
+          "type": "object",
+          "$ref": "#/definitions/CacheConfiguration"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
@@ -5147,6 +5126,38 @@
           "x-ms-enum": {
             "name": "EnabledState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryStringCachingBehavior": {
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "IgnoreSpecifiedQueryStrings",
+            "IncludeSpecifiedQueryStrings",
+            "NotSet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "afdQueryStringCachingBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
+        },
+        "compressionSettings": {
+          "description": "compression settings.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/CompressionSettings"
           }
         }
       }
