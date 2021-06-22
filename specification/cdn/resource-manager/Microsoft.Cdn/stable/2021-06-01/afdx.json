@@ -5062,20 +5062,8 @@
             "description": "A route pattern of the rule. Must not have any * except possibly after the final / at the end of the path."
           }
         },
-        "enableCache": {
-          "description": "Whether to enable cache. If cache is enabled, cacheConfiguration cannot be null.",
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnableCache",
-            "modelAsString": true
-          }
-        },
         "cacheConfiguration": {
-          "description": "The caching configuration associated with this rule.",
+          "description": "The caching configuration associated with this rule. To disable caching, do not provide a cacheConfiguration object.",
           "type": "object",
           "$ref": "#/definitions/CacheConfiguration"
         },
@@ -5140,8 +5128,7 @@
             "IgnoreQueryString",
             "UseQueryString",
             "IgnoreSpecifiedQueryStrings",
-            "IncludeSpecifiedQueryStrings",
-            "NotSet"
+            "IncludeSpecifiedQueryStrings"
           ],
           "type": "string",
           "x-ms-enum": {
