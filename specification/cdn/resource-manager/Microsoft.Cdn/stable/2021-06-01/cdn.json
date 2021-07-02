@@ -4304,6 +4304,7 @@
         "queryStringCachingBehavior": {
           "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
           "enum": [
+            "HonorRoute",
             "IgnoreQueryString",
             "UseQueryString",
             "IgnoreSpecifiedQueryStrings",
@@ -4311,7 +4312,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "afdQueryStringCachingBehavior",
+            "name": "ruleQueryStringCachingBehavior",
             "modelAsString": true
           }
         },
@@ -4323,12 +4324,13 @@
           "description": "Caching behavior for the requests",
           "type": "string",
           "enum": [
+            "HonorRoute",
             "HonorOrigin",
             "OverrideAlways",
             "OverrideIfOriginMissing"
           ],
           "x-ms-enum": {
-            "name": "cacheBehavior",
+            "name": "ruleCacheBehavior",
             "modelAsString": true
           }
         },
@@ -4337,9 +4339,18 @@
           "type": "string",
           "format": "duration"
         },
-        "isCompressionEnabled": {
-          "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
-          "type": "boolean"
+        "IsCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled. Default value is honor the value on route. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "string",
+          "enum": [
+            "HonorRoute",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ruleIsCompressionEnabled",
+            "modelAsString": true
+          }
         }
       }
     },
