@@ -4324,7 +4324,6 @@
           "description": "Caching behavior for the requests",
           "type": "string",
           "enum": [
-            "HonorRoute",
             "HonorOrigin",
             "OverrideAlways",
             "OverrideIfOriginMissing"
