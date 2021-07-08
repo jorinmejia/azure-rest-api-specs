@@ -4269,18 +4269,11 @@
     },
     "OriginGroupOverride": {
       "description": "Defines the parameters for the origin group override configuration.",
-      "required": [
-        "originGroup"
-      ],
       "properties": {
         "originGroup": {
           "description": "defines the OriginGroup that would override the DefaultOriginGroup on route.",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
-        },
-        "originPath": {
-          "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
-          "type": "string"
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
@@ -4302,9 +4295,8 @@
       "type": "object",
       "properties": {
         "queryStringCachingBehavior": {
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
+          "description": "Defines how frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
           "enum": [
-            "HonorRoute",
             "IgnoreQueryString",
             "UseQueryString",
             "IgnoreSpecifiedQueryStrings",
@@ -4319,6 +4311,18 @@
         "queryParameters": {
           "description": "query parameters to include or exclude (comma separated).",
           "type": "string"
+        },
+        "IsCompressionEnabled": {
+          "description": "Indicates whether content compression is enabled. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ruleIsCompressionEnabled",
+            "modelAsString": true
+          }
         },
         "cacheBehavior": {
           "description": "Caching behavior for the requests",
@@ -4337,19 +4341,6 @@
           "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
           "type": "string",
           "format": "duration"
-        },
-        "IsCompressionEnabled": {
-          "description": "Indicates whether content compression is enabled. Default value is honor the value on route. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
-          "type": "string",
-          "enum": [
-            "HonorRoute",
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ruleIsCompressionEnabled",
-            "modelAsString": true
-          }
         }
       }
     },
