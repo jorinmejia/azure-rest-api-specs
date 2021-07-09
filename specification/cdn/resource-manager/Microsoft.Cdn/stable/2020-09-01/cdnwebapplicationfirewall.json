@@ -616,7 +616,7 @@
             "PostArgs"
           ],
           "x-ms-enum": {
-            "name": "MatchVariable",
+            "name": "WafMatchVariable",
             "modelAsString": true
           }
         },
