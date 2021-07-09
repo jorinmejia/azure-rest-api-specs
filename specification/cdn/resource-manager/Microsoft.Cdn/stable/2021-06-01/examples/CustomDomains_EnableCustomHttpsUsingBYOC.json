@@ -11,7 +11,7 @@
       "certificateSource": "AzureKeyVault",
       "protocolType": "ServerNameIndication",
       "certificateSourceParameters": {
-        "OData.type": "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters",
+        "TypeName": "KeyVaultCertificateSourceParameters",
         "subscriptionId": "subid",
         "resourceGroupName": "RG",
         "vaultName": "kv",

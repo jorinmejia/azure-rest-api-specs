@@ -20,7 +20,7 @@
                 {
                   "name": "RequestMethod",
                   "parameters": {
-                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestMethodConditionParameters",
+                    "typename": "DeliveryRuleRequestMethodConditionParameters",
                     "operator": "Equal",
                     "matchValues": [
                       "GET"
@@ -33,7 +33,7 @@
                 {
                   "name": "ModifyResponseHeader",
                   "parameters": {
-                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                    "typename": "DeliveryRuleHeaderActionParameters",
                     "headerAction": "Overwrite",
                     "headerName": "X-CDN",
                     "value": "MSFT"
