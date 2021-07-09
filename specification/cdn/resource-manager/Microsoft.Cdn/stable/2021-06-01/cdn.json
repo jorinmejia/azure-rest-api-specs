@@ -2801,7 +2801,12 @@
             "UrlFileName",
             "HttpVersion",
             "Cookies",
-            "IsDevice"
+            "IsDevice",
+            "SocketIP",
+            "ClientPort",
+            "ServerPort",
+            "Hostname",
+            "SslProtocol"
           ],
           "x-ms-enum": {
             "name": "MatchVariable",
@@ -3059,6 +3064,114 @@
         "parameters": {
           "description": "Defines the parameters for the condition.",
           "$ref": "#/definitions/IsDeviceMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleSocketIPCondition": {
+      "description": "Defines the SocketIP condition for the delivery rule.",
+      "x-ms-discriminator-value": "SocketIP",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SocketIPMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleRequestClientPortCondition": {
+      "description": "Defines the RequestClientPort condition for the delivery rule.",
+      "x-ms-discriminator-value": "RequestClientPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/RequestClientPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleServerPortCondition": {
+      "description": "Defines the ServerPort condition for the delivery rule.",
+      "x-ms-discriminator-value": "ServerPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/ServerPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleRequestHostnameCondition": {
+      "description": "Defines the RequestHostname condition for the delivery rule.",
+      "x-ms-discriminator-value": "RequestHostname",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/RequestHostnameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleRequestHttpVersionCondition": {
+      "description": "Defines the RequestHttpVersion condition for the delivery rule.",
+      "x-ms-discriminator-value": "RequestHttpVersion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/RequestHttpVersionMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleSslProtocolCondition": {
+      "description": "Defines the SslProtocol condition for the delivery rule.",
+      "x-ms-discriminator-value": "SslProtocol",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SslProtocolMatchConditionParameters"
         }
       }
     },
@@ -3762,6 +3875,284 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "SocketIPMatchConditionParameters": {
+      "description": "Defines the parameters for SocketIP match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleSocketIPConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "IPMatch"
+          ],
+          "x-ms-enum": {
+            "name": "SocketIPOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "RequestClientPortMatchConditionParameters": {
+      "description": "Defines the parameters for RequestClientPort match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "integer",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestClientPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "RequestClientPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "integer"
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "ServerPortMatchConditionParameters": {
+      "description": "Defines the parameters for ServerPort match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "integer",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleServerPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "RequestHostnameMatchConditionParameters": {
+      "description": "Defines the parameters for RequestHostname match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHostnameConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "RequestHostnameOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "RequestHttpVersionMatchConditionParameters": {
+      "description": "Defines the parameters for RequestHttpVersion match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHttpVersionConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "RequestHttpVersionOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SslProtocolMatchConditionParameters": {
+      "description": "Defines the parameters for SslProtocol match conditions",
+      "required": [
+        "operator",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleSslProtocolConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "SslProtocolOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string",
+		        "enum": [
+              "HTTP",
+              "HTTPS"
+            ]
           }
         }
       }
