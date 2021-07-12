@@ -11,7 +11,7 @@
       "certificateSource": "Cdn",
       "protocolType": "ServerNameIndication",
       "certificateSourceParameters": {
-        "TypeName": "CdnCertificateSourceParameters",
+        "typeName": "CdnCertificateSourceParameters",
         "certificateType": "Shared"
       }
     }
