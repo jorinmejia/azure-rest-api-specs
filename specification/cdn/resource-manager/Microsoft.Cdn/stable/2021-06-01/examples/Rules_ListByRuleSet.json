@@ -20,7 +20,7 @@
                 {
                   "name": "RequestMethod",
                   "parameters": {
-                    "typename": "DeliveryRuleRequestMethodConditionParameters",
+                    "typeName": "DeliveryRuleRequestMethodConditionParameters",
                     "operator": "Equal",
                     "matchValues": [
                       "GET"
@@ -33,7 +33,7 @@
                 {
                   "name": "ModifyResponseHeader",
                   "parameters": {
-                    "typename": "DeliveryRuleHeaderActionParameters",
+                    "typeName": "DeliveryRuleHeaderActionParameters",
                     "headerAction": "Overwrite",
                     "headerName": "X-CDN",
                     "value": "MSFT"
