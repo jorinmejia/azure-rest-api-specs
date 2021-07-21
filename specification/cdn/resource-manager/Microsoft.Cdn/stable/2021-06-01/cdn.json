@@ -2759,7 +2759,8 @@
         },
         "order": {
           "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "conditions": {
           "description": "A list of conditions that must be matched for the actions to be executed",
@@ -4378,6 +4379,7 @@
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4386,6 +4388,7 @@
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4398,12 +4401,14 @@
         "priority": {
           "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5.",
           "type": "integer",
+          "format": "int32",
           "maximum": 5,
           "minimum": 1
         },
         "weight": {
           "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
           "type": "integer",
+          "format": "int32",
           "maximum": 1000,
           "minimum": 1
         },
@@ -4471,6 +4476,7 @@
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
+          "format": "int32",
           "maximum": 50,
           "minimum": 0
         },
@@ -4698,6 +4704,7 @@
         "httpPort": {
           "description": "The value of the HTTP port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4706,6 +4713,7 @@
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
           "type": "integer",
+          "format": "int32",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
@@ -4718,12 +4726,14 @@
         "priority": {
           "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5",
           "type": "integer",
+          "format": "int32",
           "maximum": 5,
           "minimum": 1
         },
         "weight": {
           "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
           "type": "integer",
+          "format": "int32",
           "maximum": 1000,
           "minimum": 1
         },
@@ -4844,6 +4854,7 @@
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
+          "format": "int32",
           "maximum": 50,
           "minimum": 0
         },
@@ -4890,6 +4901,7 @@
         "probeIntervalInSeconds": {
           "description": "The number of seconds between health probes.Default is 240sec.",
           "type": "integer",
+          "format": "int32",
           "maximum": 255,
           "minimum": 1
         }
@@ -4914,6 +4926,7 @@
         "responseBasedFailoverThresholdPercentage": {
           "description": "The percentage of failed requests in the sample where failover should trigger.",
           "type": "integer",
+          "format": "int32",
           "maximum": 100,
           "minimum": 0
         },
@@ -4932,12 +4945,14 @@
         "begin": {
           "description": "The inclusive start of the http status code range.",
           "type": "integer",
+          "format": "int32",
           "maximum": 999,
           "minimum": 100
         },
         "end": {
           "description": "The inclusive end of the http status code range.",
           "type": "integer",
+          "format": "int32",
           "maximum": 999,
           "minimum": 100
         }
@@ -5548,7 +5563,8 @@
         },
         "prefixLength": {
           "description": "The length of the prefix of the ip address.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
