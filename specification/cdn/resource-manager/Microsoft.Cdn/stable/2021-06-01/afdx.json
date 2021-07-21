@@ -2243,6 +2243,9 @@
           "200": {
             "description": "Delete successful."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No Content. The request has been accepted but the rule set was not found."
           },
@@ -4034,13 +4037,13 @@
       "description": "Customer Certificate used for https",
       "allOf": [
         {
-          "$ref": "#/definitions/Certificate",
+          "$ref": "#/definitions/Certificate"
         }
       ],
       "properties": {
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
-          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Certificate version.",
