@@ -3984,7 +3984,7 @@
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "HttpOnly",
             "HttpsOnly",
