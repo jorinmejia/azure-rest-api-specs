@@ -2806,7 +2806,7 @@
             "ClientPort",
             "ServerPort",
             "Hostname",
-            "SslProtocol"
+            "SSLProtocol"
           ],
           "x-ms-enum": {
             "name": "MatchVariable",
@@ -3139,9 +3139,9 @@
         }
       }
     },
-    "DeliveryRuleRequestHttpVersionCondition": {
-      "description": "Defines the RequestHttpVersion condition for the delivery rule.",
-      "x-ms-discriminator-value": "RequestHttpVersion",
+    "DeliveryRuleSSLProtocolCondition": {
+      "description": "Defines the SSLProtocol condition for the delivery rule.",
+      "x-ms-discriminator-value": "SSLProtocol",
       "allOf": [
         {
           "$ref": "#/definitions/DeliveryRuleCondition"
@@ -3153,25 +3153,7 @@
       "properties": {
         "parameters": {
           "description": "Defines the parameters for the condition.",
-          "$ref": "#/definitions/RequestHttpVersionMatchConditionParameters"
-        }
-      }
-    },
-    "DeliveryRuleSslProtocolCondition": {
-      "description": "Defines the SslProtocol condition for the delivery rule.",
-      "x-ms-discriminator-value": "SslProtocol",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeliveryRuleCondition"
-        }
-      ],
-      "required": [
-        "parameters"
-      ],
-      "properties": {
-        "parameters": {
-          "description": "Defines the parameters for the condition.",
-          "$ref": "#/definitions/SslProtocolMatchConditionParameters"
+          "$ref": "#/definitions/SSLProtocolMatchConditionParameters"
         }
       }
     },
@@ -3210,13 +3192,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "transforms": {
-          "description": "List of transforms",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -3869,13 +3844,6 @@
               "Desktop"
             ]
           }
-        },
-        "transforms": {
-          "description": "List of transforms",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/transform"
-          }
         }
       }
     },
@@ -3883,13 +3851,13 @@
       "description": "Defines the parameters for SocketIP match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleSocketIPConditionParameters"
+            "DeliveryRuleSocketIPConditionParameters"
           ]
         },
         "operator": {
@@ -3913,13 +3881,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "transforms": {
-          "description": "List of transforms",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/transform"
-          }
         }
       }
     },
@@ -3927,13 +3888,13 @@
       "description": "Defines the parameters for RequestClientPort match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "integer",
+        "typeName": {
+          "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestClientPortConditionParameters"
+            "DeliveryRuleRequestClientPortConditionParameters"
           ]
         },
         "operator": {
@@ -3962,7 +3923,10 @@
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
-          "type": "integer"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "transforms": {
           "description": "List of transforms",
@@ -3977,13 +3941,13 @@
       "description": "Defines the parameters for ServerPort match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "integer",
+        "typeName": {
+          "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleServerPortConditionParameters"
+            "DeliveryRuleServerPortConditionParameters"
           ]
         },
         "operator": {
@@ -4016,13 +3980,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "transforms": {
-          "description": "List of transforms",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/transform"
-          }
         }
       }
     },
@@ -4030,13 +3987,13 @@
       "description": "Defines the parameters for RequestHostname match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHostnameConditionParameters"
+            "DeliveryRuleRequestHostnameConditionParameters"
           ]
         },
         "operator": {
@@ -4079,17 +4036,17 @@
         }
       }
     },
-    "RequestHttpVersionMatchConditionParameters": {
-      "description": "Defines the parameters for RequestHttpVersion match conditions",
+    "SSLProtocolMatchConditionParameters": {
+      "description": "Defines the parameters for SSLProtocol match conditions",
       "required": [
         "operator",
-        "@odata.type"
+        "typeName"
       ],
       "properties": {
-        "@odata.type": {
+        "typeName": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHttpVersionConditionParameters"
+            "DeliveryRuleSSLProtocolConditionParameters"
           ]
         },
         "operator": {
@@ -4099,44 +4056,7 @@
             "Equal"
           ],
           "x-ms-enum": {
-            "name": "RequestHttpVersionOperator",
-            "modelAsString": true
-          }
-        },
-        "negateCondition": {
-          "description": "Describes if this is negate condition or not",
-          "type": "boolean"
-        },
-        "matchValues": {
-          "description": "The match value for the condition of the delivery rule",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SslProtocolMatchConditionParameters": {
-      "description": "Defines the parameters for SslProtocol match conditions",
-      "required": [
-        "operator",
-        "@odata.type"
-      ],
-      "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleSslProtocolConditionParameters"
-          ]
-        },
-        "operator": {
-          "description": "Describes operator to be matched",
-          "type": "string",
-          "enum": [
-            "Equal"
-          ],
-          "x-ms-enum": {
-            "name": "SslProtocolOperator",
+            "name": "SSLProtocolOperator",
             "modelAsString": true
           }
         },
@@ -4150,8 +4070,12 @@
           "items": {
             "type": "string",
 		        "enum": [
-              "HTTP",
-              "HTTPS"
+              "PCTv1",
+              "SSLv2",
+              "SSLv3",
+              "TLSv1",
+              "TLSv1.1",
+              "TLSv1.2"
             ]
           }
         }
