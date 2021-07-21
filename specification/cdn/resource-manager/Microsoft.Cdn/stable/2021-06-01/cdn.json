@@ -2802,7 +2802,7 @@
             "HttpVersion",
             "Cookies",
             "IsDevice",
-            "SocketIP",
+            "SocketAddress",
             "ClientPort",
             "ServerPort",
             "Hostname",
@@ -3067,9 +3067,9 @@
         }
       }
     },
-    "DeliveryRuleSocketIPCondition": {
-      "description": "Defines the SocketIP condition for the delivery rule.",
-      "x-ms-discriminator-value": "SocketIP",
+    "DeliveryRuleSocketAddressCondition": {
+      "description": "Defines the SocketAddress condition for the delivery rule.",
+      "x-ms-discriminator-value": "SocketAddress",
       "allOf": [
         {
           "$ref": "#/definitions/DeliveryRuleCondition"
@@ -3081,7 +3081,7 @@
       "properties": {
         "parameters": {
           "description": "Defines the parameters for the condition.",
-          "$ref": "#/definitions/SocketIPMatchConditionParameters"
+          "$ref": "#/definitions/SocketAddressMatchConditionParameters"
         }
       }
     },
@@ -3847,8 +3847,8 @@
         }
       }
     },
-    "SocketIPMatchConditionParameters": {
-      "description": "Defines the parameters for SocketIP match conditions",
+    "SocketAddressMatchConditionParameters": {
+      "description": "Defines the parameters for SocketAddress match conditions",
       "required": [
         "operator",
         "typeName"
@@ -3857,7 +3857,7 @@
         "typeName": {
           "type": "string",
           "enum": [
-            "DeliveryRuleSocketIPConditionParameters"
+            "DeliveryRuleSocketAddressConditionParameters"
           ]
         },
         "operator": {
@@ -3867,7 +3867,7 @@
             "IPMatch"
           ],
           "x-ms-enum": {
-            "name": "SocketIPOperator",
+            "name": "SocketAddressOperator",
             "modelAsString": true
           }
         },
