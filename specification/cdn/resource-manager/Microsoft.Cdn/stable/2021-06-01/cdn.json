@@ -2801,7 +2801,12 @@
             "UrlFileName",
             "HttpVersion",
             "Cookies",
-            "IsDevice"
+            "IsDevice",
+            "SocketAddress",
+            "ClientPort",
+            "ServerPort",
+            "Hostname",
+            "SSLProtocol"
           ],
           "x-ms-enum": {
             "name": "MatchVariable",
@@ -3062,6 +3067,96 @@
         }
       }
     },
+    "DeliveryRuleSocketAddressCondition": {
+      "description": "Defines the SocketAddress condition for the delivery rule.",
+      "x-ms-discriminator-value": "SocketAddress",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SocketAddressMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleRequestClientPortCondition": {
+      "description": "Defines the RequestClientPort condition for the delivery rule.",
+      "x-ms-discriminator-value": "RequestClientPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/RequestClientPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleServerPortCondition": {
+      "description": "Defines the ServerPort condition for the delivery rule.",
+      "x-ms-discriminator-value": "ServerPort",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/ServerPortMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleRequestHostnameCondition": {
+      "description": "Defines the RequestHostname condition for the delivery rule.",
+      "x-ms-discriminator-value": "RequestHostname",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/RequestHostnameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleSSLProtocolCondition": {
+      "description": "Defines the SSLProtocol condition for the delivery rule.",
+      "x-ms-discriminator-value": "SSLProtocol",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/SSLProtocolMatchConditionParameters"
+        }
+      }
+    },
     "RemoteAddressMatchConditionParameters": {
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
@@ -3097,13 +3192,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "transforms": {
-          "description": "List of transforms",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/transform"
           }
         }
       }
@@ -3756,12 +3844,232 @@
               "Desktop"
             ]
           }
+        }
+      }
+    },
+    "SocketAddressMatchConditionParameters": {
+      "description": "Defines the parameters for SocketAddress match conditions",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleSocketAddressConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "IPMatch"
+          ],
+          "x-ms-enum": {
+            "name": "SocketAddressOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestClientPortMatchConditionParameters": {
+      "description": "Defines the parameters for RequestClientPort match conditions",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleRequestClientPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "RequestClientPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "transforms": {
           "description": "List of transforms",
           "type": "array",
           "items": {
             "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "ServerPortMatchConditionParameters": {
+      "description": "Defines the parameters for ServerPort match conditions",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleServerPortConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPortOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestHostnameMatchConditionParameters": {
+      "description": "Defines the parameters for RequestHostname match conditions",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleRequestHostnameConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "RegEx"
+          ],
+          "x-ms-enum": {
+            "name": "RequestHostnameOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SSLProtocolMatchConditionParameters": {
+      "description": "Defines the parameters for SSLProtocol match conditions",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleSSLProtocolConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "SSLProtocolOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string",
+		        "enum": [
+              "PCTv1",
+              "SSLv2",
+              "SSLv3",
+              "TLSv1",
+              "TLSv1.1",
+              "TLSv1.2"
+            ]
           }
         }
       }
