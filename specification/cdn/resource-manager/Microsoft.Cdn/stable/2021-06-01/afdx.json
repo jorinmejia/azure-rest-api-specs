@@ -5121,7 +5121,7 @@
       "type": "object",
       "properties": {
         "queryStringCachingBehavior": {
-          "description": "Defines how frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings when caching, cache every request with a unique URL, or cache specific query strings.",
+          "description": "Defines how Frontdoor caches requests that include query strings. You can ignore any query strings when caching, ignore specific query strings, cache every request with a unique URL, or cache specific query strings.",
           "enum": [
             "IgnoreQueryString",
             "UseQueryString",
